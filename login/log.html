@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -18,20 +19,40 @@
                 <div class="form-content">
                     <a href="../index.html" class="btn">Back</a>
                     <header>Login</header>
-                    <form action="#">
+                    <form id="form-data">
                         <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input">
+                            <input name="username" type="text" placeholder="Username" class="input">
                         </div>
 
                         <div class="field input-field">
-                            <input type="password" placeholder="Password" class="password">
+                            <input name="password" type="password" placeholder="Password" class="password">
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
 
                         <div class="field button-field">
-                            <button>Login</button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
+
+                    <script>
+                        const formEl = document.getElementById('form-data')
+
+                        formEl.addEventListener('submit', function(e) {
+                            e.preventDefault();
+
+                            const payload = new FormData(formEl);
+                            fetch('http://ephemera.cloud/hotel/auth/login/', {
+                                method: 'POST',
+                                mode:"cors",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(payload)
+                            }).then(res => res.json())
+                              .then(data => console.log(data))
+                              .catch(err => console.log(err));
+                        });
+                    </script>                    
 
                     <div class="form-link">
                         <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
@@ -66,31 +87,6 @@
 
                     <div class="form-link">
                         <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form login-admin">
-                <div class="form-content">
-                    <a href="../index.html" class="btn">Back</a>
-                    <header>Login</header>
-                    <form action="#">
-                        <div class="field input-field">
-                            <input type="email" placeholder="Email" class="input">
-                        </div>
-
-                        <div class="field input-field">
-                            <input type="password" placeholder="Password" class="password">
-                            <i class='bx bx-hide eye-icon'></i>
-                        </div>
-
-                        <div class="field button-field">
-                            <button>Login</button>
-                        </div>
-                    </form>
-
-                    <div class="form-link">
-                        <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
                     </div>
                 </div>
             </div>
